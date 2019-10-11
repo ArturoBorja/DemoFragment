@@ -7,8 +7,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DemoFragment.DemoFragmentListener {
     Button btn;
     Button btn_enviar;
     Button btn_eliminar;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
     void CrearFragment(){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragment = new DemoFragment();
+        fragment = new DemoFragment(MainActivity.this);
         fragmentTransaction.add(R.id.fragment_conteiner,fragment);
         fragmentTransaction.commit();
     }
@@ -57,5 +58,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(fragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void presionoBoton(String mensaje) {
+        Toast.makeText(this, "Main Activity: "+mensaje, Toast.LENGTH_LONG).show();
     }
 }

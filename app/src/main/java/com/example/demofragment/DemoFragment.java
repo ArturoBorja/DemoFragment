@@ -20,8 +20,9 @@ public class DemoFragment extends Fragment {
     int contador =0;
     TextView tv;
     Button b;
-    public DemoFragment() {
-        // Required empty public constructor
+    DemoFragmentListener activity;
+    public DemoFragment(DemoFragmentListener activity) {
+        this.activity = activity;
     }
 
 
@@ -36,6 +37,7 @@ public class DemoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Aumentar();
+                activity.presionoBoton(tv.getText().toString());
             }
         });
         return v;
@@ -43,6 +45,9 @@ public class DemoFragment extends Fragment {
     public void Aumentar(){
         contador++;
         tv.setText(String.valueOf(contador));
+    }
+    public interface DemoFragmentListener{
+        public void presionoBoton(String mensaje);
     }
 
 }
